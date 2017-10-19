@@ -1,0 +1,70 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19/10/2017, 16:54:41
+    Author     : Cliente
+*/
+
+/*
+    <div id="dualRingLoading" class="lds-css">
+        <div class="lds-dual-ring">
+            <div class="spinner-container">
+                <div></div>
+            </div>
+        </div>
+    </div>
+*/
+@-webkit-keyframes lds-dual-ring {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@keyframes lds-dual-ring {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+.lds-dual-ring {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 99999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.spinner-container {
+    width: 100%;
+    height: calc(100% - 100px);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lds-dual-ring div:not(.spinner-container) {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 16px solid #000;
+    border-color: #FF5722 transparent #FF5722 transparent;
+    -webkit-animation: lds-dual-ring 1.3s linear infinite;
+    animation: lds-dual-ring 1.3s linear infinite;
+    box-shadow: 0 0 120px #FF5722 inset;
+}

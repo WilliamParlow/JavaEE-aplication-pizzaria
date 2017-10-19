@@ -1,0 +1,159 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/10/2017, 18:10:53
+    Author     : William Parlow Nichelatti
+*/
+/*
+    The selected project colors
+
+    - Green: #3cc844
+    - Orange: #FF5722
+
+*/
+
+html, body {
+    height: 100%;
+}
+
+.navbar {
+    border-radius: 0;
+}
+
+.login-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.login-relative {
+    position: relative;
+    overflow-x: hidden;
+    padding: 10px 0;
+    height: 100%;
+}
+
+.login-relative > div {
+    height: 100%;
+}
+
+
+.login-btn {
+    border: none;
+    color: #FFF;
+    background-color: #3cc844;
+    width: 100%;
+    padding: 2%;
+}
+
+.fade-in {
+    animation: swap-form-in 1s forwards;
+}
+
+.fade-out {
+    animation: swap-form-out 1s forwards;
+}
+
+.loginForm {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    transition: .1s ease-in;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.loginForm .panel-heading {
+    background-color: #FF5722;
+    color: #FFF;
+}
+
+.form-toggler {
+    cursor: pointer;
+}
+
+.navbar-login,
+.login-footer {
+    background-color: #FF5722;
+}
+
+.navbar-login a {
+    color: #FFF;
+}
+
+.login-footer {
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-footer > address {
+    margin: 0;
+    color: #FFF;
+}
+
+.form-toggler-container {
+    margin-top: 10px;
+}
+
+@media all and (max-width: 768px) {
+
+    .loginForm {
+        width: 95%;
+    }
+
+}
+
+@media all and (min-width: 769px) {
+
+    .loginForm {
+        width: 60%;
+    }
+
+}
+
+@media all and (min-width: 1201px) {
+
+    .loginForm {
+        width: 50%;
+    }
+
+}
+
+/*
+    --------------------------------
+    ---------- Animations ----------
+    --------------------------------
+*/
+
+@keyframes swap-form-in {
+
+    100% {
+        transform: translateX(1500px);
+        opacity: 0;
+    }
+
+}
+
+@keyframes swap-form-out {
+
+    0% {
+        transform: translateY(-1500px);
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+
+}
