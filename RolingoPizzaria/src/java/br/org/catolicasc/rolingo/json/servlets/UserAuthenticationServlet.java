@@ -55,28 +55,62 @@ public class UserAuthenticationServlet extends HttpServlet {
 
         SimpleResult result = new SimpleResult();
 
-        try {
+        if (login != null && passwd != null) {
 
-            user = userDao.findUser(login, passwd);
+            try {
 
-            HttpSession session = request.getSession(true);
+                user = userDao.findUser(login, passwd);
 
-            session.setAttribute("userId", Long.toString(user.getId()));
-            session.setAttribute("userName", user.getName());
+                HttpSession session = request.getSession(true);
 
-            String nextUrl = "../home.jsp";
-            request.getRequestDispatcher(nextUrl).forward(request, response);
+                session.setAttribute("userId", Long.toString(user.getId()));
+                session.setAttribute("userName", user.getName());
 
-        } catch (Exception e) {
-            
+                String nextUrl = "../home.jsp";
+                request.getRequestDispatcher(nextUrl).forward(request, response);
+
+                result.setSuccess(true);
+                result.setDatasource(user);
+
+                Gson gson = new Gson();
+                String json = gson.toJson(result);
+
+                PrintWriter out = response.getWriter();
+                out.append(json);
+                out.flush();
+
+            } catch (Exception e) {
+
+                response.setContentType("application/json");
+
+                System.err.println(String.format("Fail to authenticate with login: %s & pass: %s", login, passwd));
+
+                Error error = new Error(535, "Falha na autenticação. Usuário não encontrado!");
+
+                result.addError(error);
+                result.setDatasource(e.getLocalizedMessage());
+                result.setSuccess(false);
+                result.setCount(result.getCount());
+
+                Gson gson = new Gson();
+                String json = gson.toJson(result);
+
+                PrintWriter out = response.getWriter();
+                out.append(json);
+                out.flush();
+
+            }
+
+        } else {
+
             response.setContentType("application/json");
 
-            System.err.println(String.format("Fail to authenticate with login: %s & pass: %s", login, passwd));
+            System.err.println(String.format("Fail to create user with login: %s & pass: %s. Left answer some form fields", login, passwd));
 
-            Error error = new Error(535, "Falha na autenticação. Usuário não encontrado!");
+            Error error = new Error(535, "Falha na autenticação. Preencha todos os campos corretamente!");
 
             result.addError(error);
-            result.setDatasource(e.getLocalizedMessage());
+            result.setDatasource("Falha na autenticação. Preencha todos os campos corretamente!");
             result.setSuccess(false);
             result.setCount(result.getCount());
 

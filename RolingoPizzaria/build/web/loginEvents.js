@@ -60,6 +60,77 @@ $(document).ready(function () {
 
                 console.log(response);
 
+                if (!response.success && response.success) {
+
+                    try {
+                        
+                        let errDescriptions = '';
+
+                        Object.keys(response.errors).forEach(function (error) {
+                            console.log(response.errors[error].description);
+                            errDescriptions = errDescriptions.concat(response.errors[error].description);
+                        });
+                        
+                        $('.invalid-text-form').html(errDescriptions);
+                        $('input').addClass('invalid-form-input');
+
+                    } catch (err) {
+                        console.warn(err);
+                        $('.invalid-text-form').html(err);
+                        $('input').addClass('invalid-form-input');
+                    }
+
+                    return;
+
+                } else {
+                    $('body').html(response);
+                }
+
+            },
+            error: function (err) {
+
+                console.log(err);
+
+                $('.lds-dual-ring').fadeOut(LOADING_DELAY, function () {
+
+                    $('#dualRingLoading').fadeOut();
+
+                });
+
+            }
+
+        });
+
+    });
+    
+    $('#signup').submit(function (event) {
+
+        event.preventDefault();
+
+        let login = $(event.target).find('input[name=login]').val();
+        let passwd = $(event.target).find('input[name=passwd]').val();
+        let name = $(event.target).find('input[name=name]').val();
+
+        $('#dualRingLoading').fadeIn(function () {
+
+            $('.lds-dual-ring').fadeIn();
+
+        });
+
+        $.ajax({
+
+            method: "POST",
+            url: "login/UserAuthenticationServlet?name=" + name + "&login=" + login + "&passwd=" + passwd,
+            success: function (response) {
+
+                $('.lds-dual-ring').fadeOut(LOADING_DELAY, function () {
+
+                    $('#dualRingLoading').fadeOut();
+
+                });
+
+                console.log(response);
+
                 if (!response.success) {
 
                     try {
@@ -101,7 +172,7 @@ $(document).ready(function () {
 
         });
 
-    })
+    });
 
 })
 
