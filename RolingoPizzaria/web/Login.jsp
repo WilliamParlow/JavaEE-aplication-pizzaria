@@ -81,7 +81,7 @@
 
                 </form>
 
-                <form id="signup" action="login/CreateNewUser" class="loginForm panel fade-in">
+                <form id="signup" action="login/CreateNewUser" method="POST" class="loginForm panel fade-in">
 
                     <header class="panel-heading text-center">
 
@@ -114,7 +114,7 @@
 
                     <footer class="panel-footer text-center">
 
-                        <button type="submit" class="login-btn">Entrar!</button>
+                        <button type="submit" class="login-btn">Cadastrar e entrar!</button>
 
                         <div class="form-toggler-container">
                             <a class="form-toggler" data-fade_in_target="#signin" data-fade_out_target="#signup">Já possui uma conta? Entre!</a>

@@ -120,7 +120,7 @@ $(document).ready(function () {
         $.ajax({
 
             method: "POST",
-            url: "login/UserAuthenticationServlet?name=" + name + "&login=" + login + "&passwd=" + passwd,
+            url: "login/CreateNewUser?name=" + name + "&login=" + login + "&passwd=" + passwd,
             success: function (response) {
 
                 $('.lds-dual-ring').fadeOut(LOADING_DELAY, function () {

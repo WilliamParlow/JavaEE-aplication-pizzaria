@@ -85,7 +85,7 @@ public class CreateNewUser extends HttpServlet {
 
                 System.err.println(String.format("Fail to create user with login: %s & pass: %s & name: %s", login, passwd, name));
 
-                Error error = new Error(535, "Falha na autenticação. Usuário não encontrado!");
+                Error error = new Error(535, "Falha na criação do usuário. Preencha os campos corretamente.");
 
                 result.addError(error);
                 result.setDatasource(e.getLocalizedMessage());
