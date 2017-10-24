@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,46 +45,48 @@ public class UserAuthenticationServlet extends HttpServlet {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         UserDAO userDao = new UserDAO(factory);
 
-        response.setContentType("application/json");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
+        User user;
 
         String login = request.getParameter("login");
         String passwd = request.getParameter("passwd");
-        
+
         SimpleResult result = new SimpleResult();
 
         try {
 
-            User user = userDao.findUser(login, passwd);
-            
-            result.setDatasource(user);
-            result.setSuccess(true);
-            result.setCount(result.getCount());
+            user = userDao.findUser(login, passwd);
 
-            Gson gson = new Gson();
-            String json = gson.toJson(result); 
+            HttpSession session = request.getSession(true);
 
-            PrintWriter out = response.getWriter();
-            out.append(json);
-            out.flush();
+            session.setAttribute("userId", Long.toString(user.getId()));
+            session.setAttribute("userName", user.getName());
+
+            String nextUrl = "../home.jsp";
+            request.getRequestDispatcher(nextUrl).forward(request, response);
 
         } catch (Exception e) {
             
+            response.setContentType("application/json");
+
             System.err.println(String.format("Fail to authenticate with login: %s & pass: %s", login, passwd));
-            
+
             Error error = new Error(535, "Falha na autenticação. Usuário não encontrado!");
-            
+
             result.addError(error);
             result.setDatasource(e.getLocalizedMessage());
             result.setSuccess(false);
             result.setCount(result.getCount());
-            
+
             Gson gson = new Gson();
             String json = gson.toJson(result);
-            
+
             PrintWriter out = response.getWriter();
             out.append(json);
             out.flush();
-            
+
         }
 
     }

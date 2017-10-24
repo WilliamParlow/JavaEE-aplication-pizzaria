@@ -45,7 +45,7 @@ and open the template in the editor.
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, .6);
 }
 
 .spinner-container {
@@ -66,5 +66,4 @@ and open the template in the editor.
     border-color: #FF5722 transparent #FF5722 transparent;
     -webkit-animation: lds-dual-ring 1.3s linear infinite;
     animation: lds-dual-ring 1.3s linear infinite;
-    box-shadow: 0 0 120px #FF5722 inset;
 }

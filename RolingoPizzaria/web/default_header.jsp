@@ -1,11 +1,10 @@
 <%-- 
     Document   : default_header
-    Created on : 18/10/2017, 17:07:14
+    Created on : 23/10/2017, 23:35:33
     Author     : Cliente
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 
 <!-- BOOTSTRAP -->
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" 

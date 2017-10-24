@@ -42,18 +42,23 @@ public class User implements Serializable {
 
     @Column(unique = false, nullable = false)
     private boolean admin;
+    
+    @Column(unique = false, nullable = false)
+    private boolean blocked;
 
     public User() {
         super();
     }
 
-    public User(String name, String login, String passwd, boolean admin) {
-        super();
-        setName(name);
-        setLogin(login);
-        setPasswd(passwd);
-        setIsAdmin(admin);
+    public User(String name, String login, String passwd, boolean admin, boolean blocked) {
+        this.name = name;
+        this.login = login;
+        this.passwd = passwd;
+        this.admin = admin;
+        this.blocked = blocked;
     }
+
+    
 
     public Long getId() {
         return id;
@@ -93,6 +98,14 @@ public class User implements Serializable {
 
     public void setIsAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public boolean isBlocked() {
+        return blocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        this.blocked = blocked;
     }
 
     @Override

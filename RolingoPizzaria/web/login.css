@@ -106,6 +106,14 @@ html, body {
     margin-top: 10px;
 }
 
+.invalid-form-input {
+    border: 2px solid red;
+}
+
+.invalid-text-form {
+    color: red
+}
+
 @media all and (max-width: 768px) {
 
     .loginForm {

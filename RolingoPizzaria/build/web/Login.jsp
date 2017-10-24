@@ -64,6 +64,8 @@
                             <label for="passwd">Senha:&nbsp;</label>
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Entre com sua senha!" required>
                         </div>
+                        
+                        <div class="invalid-text-form"></div>
 
                     </main>
 
@@ -105,6 +107,8 @@
                             <label for="passwd">Senha:&nbsp;</label>
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Digite sua senha!" required>
                         </div>
+                        
+                        <div class="invalid-text-form"></div>
 
                     </main>
 
