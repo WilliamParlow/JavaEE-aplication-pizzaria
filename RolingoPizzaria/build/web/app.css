@@ -1,0 +1,17 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 31/10/2017, 17:33:16
+    Author     : Cliente
+*/
+
+html, body {
+    height: 100%;
+}
+
+.navbar {
+    border-radius: 0;
+}

@@ -13,5 +13,15 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        
+        <hr>
+        
+        <p>
+            <b>UserID:&nbsp;</b><% session.getAttribute("userId"); %>
+        </p>
+        <p>
+            <b>User name:&nbsp;</b><% session.getAttribute("userName"); %>
+        </p>
+        
     </body>
 </html>

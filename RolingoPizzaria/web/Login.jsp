@@ -22,7 +22,9 @@
 
     </head>
     <body>
-
+        
+        
+        <!-- Loading ring -->
         <div id="dualRingLoading" class="lds-css">
             <div class="lds-dual-ring">
                 <div class="spinner-container">
@@ -31,6 +33,7 @@
             </div>
         </div>
 
+        <!-- Page navbar -->
         <nav class="navbar-login navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -38,11 +41,17 @@
                 </div>
             </div>
         </nav>
+        
+        
 
+        <!-- Page content - Signup and Signin forms -->
         <section class="login-relative container-fluid">
 
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
+            <div class="col-xs-12">
+                
+                
+                
+                <!-- Signin form -->
                 <form id="signin" method="POST" action="login/UserAuthenticationServlet" class="loginForm panel fade-out">
 
                     <header class="panel-heading text-center">
@@ -65,7 +74,7 @@
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Entre com sua senha!" required>
                         </div>
                         
-                        <div class="invalid-text-form"></div>
+                        <div class="invalid-text-form">${msg}</div>
 
                     </main>
 
@@ -80,7 +89,11 @@
                     </footer>
 
                 </form>
-
+                
+                
+                
+                
+                <!-- Signup form -->
                 <form id="signup" action="login/CreateNewUser" method="POST" class="loginForm panel fade-in">
 
                     <header class="panel-heading text-center">
@@ -108,7 +121,7 @@
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Digite sua senha!" required>
                         </div>
                         
-                        <div class="invalid-text-form"></div>
+                        <div class="invalid-text-form">${msg}</div>
 
                     </main>
 
@@ -123,18 +136,26 @@
                     </footer>
 
                 </form>
+                
+                
 
+                
             </div>
 
         </section>
 
+        <!-- Footer -->
         <footer class="login-footer">
             <address>Developed by Will - <% out.print(new SimpleDateFormat("YYYY").format(new Date()));%></address>
         </footer>
 
+        
+        
         <%@include file="default_footer.jsp"%>
 
         <script src="loginEvents.js"></script>
+        
 
     </body>
+    
 </html>

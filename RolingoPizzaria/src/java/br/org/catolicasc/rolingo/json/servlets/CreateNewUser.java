@@ -53,73 +53,29 @@ public class CreateNewUser extends HttpServlet {
         String passwd = request.getParameter("passwd");
         String name = request.getParameter("name");
 
-        SimpleResult result = new SimpleResult();
-
         if (login != null && passwd != null && name != null) {
 
             try {
 
                 User user = new User(name, login, passwd, false, false);
-
                 userDao.create(user);
-                HttpSession session = request.getSession(true);
 
-                session.setAttribute("userId", Long.toString(user.getId()));
-                session.setAttribute("userName", user.getName());
-
-                response.setContentType("application/json");
-
-                result.setSuccess(true);
-                result.setDatasource(user);
-
-                Gson gson = new Gson();
-                String json = gson.toJson(result);
-
-                PrintWriter out = response.getWriter();
-                out.append(json);
-                out.flush();
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", user.getId());
+                session.setAttribute("userName", name);
+                request.getRequestDispatcher("home.jsp").forward(request, response);
 
             } catch (Exception e) {
 
-                response.setContentType("application/json");
-
-                System.err.println(String.format("Fail to create user with login: %s & pass: %s & name: %s", login, passwd, name));
-
-                Error error = new Error(535, "Falha na criação do usuário. Preencha os campos corretamente.");
-
-                result.addError(error);
-                result.setDatasource(e.getLocalizedMessage());
-                result.setSuccess(false);
-                result.setCount(result.getCount());
-
-                Gson gson = new Gson();
-                String json = gson.toJson(result);
-
-                PrintWriter out = response.getWriter();
-                out.append(json);
-                out.flush();
+                request.setAttribute("msg", "Erro no servidor. Já existe um usuário com o email ".concat(login));
+                request.getRequestDispatcher("Login.jsp");
 
             }
 
         } else {
 
-            response.setContentType("application/json");
-
-            System.err.println(String.format("Fail to create user with login: %s & pass: %s & name: %s. Left answer some form fields", login, passwd, name));
-
-            Error error = new Error(535, "Falha na autenticação. Preencha todos os campos corretamente!");
-
-            result.addError(error);
-            result.setDatasource("Falha na autenticação. Preencha todos os campos corretamente!");
-            result.setSuccess(false);
-            result.setCount(result.getCount());
-
-            Gson gson = new Gson();
-            String json = gson.toJson(result);
-
-            PrintWriter out = response.getWriter();
-            out.append(json);
-            out.flush();
+            request.setAttribute("msg", "Os dados fornecidos estão incorretos. Favor, verifique e tente novamente.");
+            request.getRequestDispatcher("Login.jsp");
 
         }
 

@@ -48,78 +48,32 @@ public class UserAuthenticationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
 
-        User user;
-
         String login = request.getParameter("login");
         String passwd = request.getParameter("passwd");
-
-        SimpleResult result = new SimpleResult();
 
         if (login != null && passwd != null) {
 
             try {
-
-                user = userDao.findUser(login, passwd);
+                
+                User user = userDao.findUser(login, passwd);
 
                 HttpSession session = request.getSession(true);
-
                 session.setAttribute("userId", Long.toString(user.getId()));
                 session.setAttribute("userName", user.getName());
 
-                String nextUrl = "../home.jsp";
-                request.getRequestDispatcher(nextUrl).forward(request, response);
-
-                result.setSuccess(true);
-                result.setDatasource(user);
-
-                Gson gson = new Gson();
-                String json = gson.toJson(result);
-
-                PrintWriter out = response.getWriter();
-                out.append(json);
-                out.flush();
+                request.getRequestDispatcher("../home.jsp").forward(request, response);
 
             } catch (Exception e) {
 
-                response.setContentType("application/json");
-
-                System.err.println(String.format("Fail to authenticate with login: %s & pass: %s", login, passwd));
-
-                Error error = new Error(535, "Falha na autenticação. Usuário não encontrado!");
-
-                result.addError(error);
-                result.setDatasource(e.getLocalizedMessage());
-                result.setSuccess(false);
-                result.setCount(result.getCount());
-
-                Gson gson = new Gson();
-                String json = gson.toJson(result);
-
-                PrintWriter out = response.getWriter();
-                out.append(json);
-                out.flush();
-
+                request.setAttribute("msg", "O usuário " + login + "fornecido não existe.");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                
             }
 
         } else {
 
-            response.setContentType("application/json");
-
-            System.err.println(String.format("Fail to create user with login: %s & pass: %s. Left answer some form fields", login, passwd));
-
-            Error error = new Error(535, "Falha na autenticação. Preencha todos os campos corretamente!");
-
-            result.addError(error);
-            result.setDatasource("Falha na autenticação. Preencha todos os campos corretamente!");
-            result.setSuccess(false);
-            result.setCount(result.getCount());
-
-            Gson gson = new Gson();
-            String json = gson.toJson(result);
-
-            PrintWriter out = response.getWriter();
-            out.append(json);
-            out.flush();
+            request.setAttribute("msg", "Dados insufucientes. Forneça todos os dados para efetuar o login.");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
 
         }
 
