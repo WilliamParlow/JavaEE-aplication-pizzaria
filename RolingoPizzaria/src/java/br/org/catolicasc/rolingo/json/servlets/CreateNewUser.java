@@ -63,7 +63,7 @@ public class CreateNewUser extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("userName", name);
-                request.getRequestDispatcher("home.jsp").forward(request, response);
+                request.getRequestDispatcher("../home.jsp").forward(request, response);
 
             } catch (Exception e) {
 
