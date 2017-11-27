@@ -13,11 +13,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <%@include file="default_header.jsp"%>
+        <%@include file="/WEB-INF/includes/default_header.jsp"%>
 
-        <link rel="stylesheet" href="login.css">
-        <link rel="stylesheet" href="loading.css">
-
+        <link rel="stylesheet" href="assets/css/login/login.css">
+        <link rel="stylesheet" href="assets/css/general/loading.css">
+ 
         <title>Entre na Rolingo - O Melhor Sistema de gerenciamento de Pizzaria</title>
 
     </head>
@@ -52,7 +52,7 @@
                 
                 
                 <!-- Signin form -->
-                <form id="signin" method="POST" action="login/UserAuthenticationServlet" class="loginForm panel fade-out">
+                <form id="signin" method="POST" action="login" class="loginForm panel fade-out">
 
                     <header class="panel-heading text-center">
 
@@ -94,7 +94,7 @@
                 
                 
                 <!-- Signup form -->
-                <form id="signup" action="login/CreateNewUser" method="POST" class="loginForm panel fade-in">
+                <form id="signup" action="create" method="POST" class="loginForm panel fade-in">
 
                     <header class="panel-heading text-center">
 
@@ -151,9 +151,9 @@
 
         
         
-        <%@include file="default_footer.jsp"%>
+        <%@include file="/WEB-INF/includes/default_footer.jsp"%>
 
-        <script src="loginEvents.js"></script>
+        <script src="assets/js/events/login/loginEvents.js"></script>
         
 
     </body>
