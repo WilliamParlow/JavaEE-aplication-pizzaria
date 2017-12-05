@@ -7,9 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!-- BOOTSTRAP -->
-<link href="/assets/css/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap/css/bootstrap.css">
 
 <!-- MATERIAL DESIGN FONT -->
-<link href="assets/css/fonts/material_design/css/material-design-iconic-font.min.css">
+<!-- http://zavoloklom.github.io/material-design-iconic-font/icons.html -->
+<link rel="stylesheet" href="assets/css/fonts/material_design/css/material-design-iconic-font.min.css">
 
 <link rel="stylesheet" href="assets/css/general/app.css">

@@ -71,8 +71,13 @@ and open the template in the editor.
     background-color: #FF5722;
 }
 
-.navbar-login a {
+.navbar-brand {
     color: #FFF;
+    cursor: default;
+    -webkit-user-select: none;  
+    -moz-user-select: none;    
+    -ms-user-select: none;      
+    user-select: none;
 }
 
 .login-footer {

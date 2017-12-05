@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/servlets/CreateNewUserServlet.java</file>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/web/WEB-INF/includes/default_header.jsp</file>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/web/WEB-INF/views/home.jsp</file>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/servlets/UserAuthenticationServlet.java</file>
+            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/controllers/LogOutServlet.java</file>
+            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/cmds/MenuMvcServlet.java</file>
+            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/web/WEB-INF/views/HomeView.jsp</file>
+            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/controllers/UserControllerServlet.java</file>
+            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/controllers/AuthenticationControllerServlet.java</file>
             <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/web/Login.jsp</file>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/web/WEB-INF/includes/default_footer.jsp</file>
-            <file>file:/C:/Users/Cliente/Documents/FACUL/Semestre%20IV/Programacao%20IV/FinalProject/JavaEEAplicationPizzaria/RolingoPizzaria/src/java/br/org/catolicasc/rolingo/filters/MainFilter.java</file>
         </group>
     </open-files>
 </project-private>

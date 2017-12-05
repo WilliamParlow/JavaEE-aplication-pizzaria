@@ -14,16 +14,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <%@include file="/WEB-INF/includes/default_header.jsp"%>
-
+       
         <link rel="stylesheet" href="assets/css/login/login.css">
         <link rel="stylesheet" href="assets/css/general/loading.css">
- 
+
         <title>Entre na Rolingo - O Melhor Sistema de gerenciamento de Pizzaria</title>
 
     </head>
     <body>
-        
-        
+
+
         <!-- Loading ring -->
         <div id="dualRingLoading" class="lds-css">
             <div class="lds-dual-ring">
@@ -37,20 +37,20 @@
         <nav class="navbar-login navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Rolingo Pizzaria</a>
+                    <span class="navbar-brand">Rolingo Pizzaria</span>
                 </div>
             </div>
         </nav>
-        
-        
+
+
 
         <!-- Page content - Signup and Signin forms -->
         <section class="login-relative container-fluid">
 
             <div class="col-xs-12">
-                
-                
-                
+
+
+
                 <!-- Signin form -->
                 <form id="signin" method="POST" action="login" class="loginForm panel fade-out">
 
@@ -73,7 +73,7 @@
                             <label for="passwd">Senha:&nbsp;</label>
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Entre com sua senha!" required>
                         </div>
-                        
+
                         <div class="invalid-text-form">${msg}</div>
 
                     </main>
@@ -89,12 +89,12 @@
                     </footer>
 
                 </form>
-                
-                
-                
-                
+
+
+
+
                 <!-- Signup form -->
-                <form id="signup" action="create" method="POST" class="loginForm panel fade-in">
+                <form id="signup" action="mvcuser" method="POST" class="loginForm panel fade-in">
 
                     <header class="panel-heading text-center">
 
@@ -120,7 +120,7 @@
                             <label for="passwd">Senha:&nbsp;</label>
                             <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Digite sua senha!" required>
                         </div>
-                        
+
                         <div class="invalid-text-form">${msg}</div>
 
                     </main>
@@ -136,10 +136,10 @@
                     </footer>
 
                 </form>
-                
-                
 
-                
+
+
+
             </div>
 
         </section>
@@ -149,13 +149,14 @@
             <address>Developed by Will - <% out.print(new SimpleDateFormat("YYYY").format(new Date()));%></address>
         </footer>
 
-        
-        
+
+
         <%@include file="/WEB-INF/includes/default_footer.jsp"%>
 
         <script src="assets/js/events/login/loginEvents.js"></script>
-        
+
+
 
     </body>
-    
+
 </html>

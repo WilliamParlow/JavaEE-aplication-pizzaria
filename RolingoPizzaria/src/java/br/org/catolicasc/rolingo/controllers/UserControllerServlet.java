@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.org.catolicasc.rolingo.servlets;
+package br.org.catolicasc.rolingo.controllers;
 
 import br.org.catolicasc.rolingo.daos.UserDAO;
 import br.org.catolicasc.rolingo.daos.entities.User;
@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Cliente
  */
-@WebServlet(name = "UserAuthenticationServlet", urlPatterns = {"/login"})
-public class UserAuthenticationServlet extends HttpServlet {
+@WebServlet(name = "UserControllerServlet", urlPatterns = {"/mvcuser"}, initParams = {
+    @WebInitParam(name = "do", value = "")})
+public class UserControllerServlet extends HttpServlet {
 
     private static final String PERSISTENCE_UNIT_NAME = "RolingoPersistensePU";
 
@@ -37,6 +39,7 @@ public class UserAuthenticationServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
 
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         UserDAO userDao = new UserDAO(factory);
@@ -46,39 +49,32 @@ public class UserAuthenticationServlet extends HttpServlet {
 
         String login = request.getParameter("login");
         String passwd = request.getParameter("passwd");
+        String name = request.getParameter("name");
 
-        if (login != null && passwd != null) {
+        if (login != null && passwd != null && name != null) {
 
             try {
 
-                User user = userDao.findUser(login, passwd);
+                User user = new User(name, login, passwd, false, false);
+                userDao.create(user);
 
-                if (user != null) {
-
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("userId", Long.toString(user.getId()));
-                    session.setAttribute("userName", user.getName());
-
-                    request.getRequestDispatcher("WEB-INF/views/home.jsp").forward(request, response);
-
-                } else {
-                    
-                    request.setAttribute("msg", "O usuário " + login + "fornecido não existe ou a senha está incorreta.");
-                    request.getRequestDispatcher("Login.jsp").forward(request, response);
-
-                }
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", user.getId());
+                session.setAttribute("userName", name);
+                
+                request.getRequestDispatcher("mvcmenu?do=lstmodel").forward(request, response);
 
             } catch (Exception e) {
 
-                request.setAttribute("msg", "O usuário " + login + "fornecido não existe ou a senha está incorreta.");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                request.setAttribute("msg", "Erro no servidor. Já existe um usuário com o email ".concat(login));
+                request.getRequestDispatcher("Login.jsp");
 
             }
 
         } else {
 
-            request.setAttribute("msg", "Dados insufucientes. Forneça todos os dados para efetuar o login.");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
+            request.setAttribute("msg", "Os dados fornecidos estão incorretos. Favor, verifique e tente novamente.");
+            request.getRequestDispatcher("Login.jsp");
 
         }
 

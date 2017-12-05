@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.org.catolicasc.rolingo.servlets;
+package br.org.catolicasc.rolingo.cmds;
 
-import br.org.catolicasc.rolingo.daos.UserDAO;
-import br.org.catolicasc.rolingo.daos.entities.User;
+import br.org.catolicasc.rolingo.adapters.MenuItem;
 import java.io.IOException;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Cliente
  */
-@WebServlet(name = "CreateNewUser", urlPatterns = {"/create"})
-public class CreateNewUserServlet extends HttpServlet {
-
-    private static final String PERSISTENCE_UNIT_NAME = "RolingoPersistensePU";
+@WebServlet(name = "MenuMvcServlet", urlPatterns = {"/mvcmenu"}, initParams = {
+    @WebInitParam(name = "do", value = "")})
+public class MenuMvcServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,43 +36,53 @@ public class CreateNewUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-        UserDAO userDao = new UserDAO(factory);
-
+      
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-
-        String login = request.getParameter("login");
-        String passwd = request.getParameter("passwd");
-        String name = request.getParameter("name");
-
-        if (login != null && passwd != null && name != null) {
-
-            try {
-
-                User user = new User(name, login, passwd, false, false);
-                userDao.create(user);
-
-                HttpSession session = request.getSession();
-                session.setAttribute("userId", user.getId());
-                session.setAttribute("userName", name);
-                request.getRequestDispatcher("WEB-INF/views/home.jsp").forward(request, response);
-
-            } catch (Exception e) {
-
-                request.setAttribute("msg", "Erro no servidor. Já existe um usuário com o email ".concat(login));
-                request.getRequestDispatcher("Login.jsp");
-
-            }
-
-        } else {
-
-            request.setAttribute("msg", "Os dados fornecidos estão incorretos. Favor, verifique e tente novamente.");
-            request.getRequestDispatcher("Login.jsp");
-
+        String action = this.readParameter(request, "do");
+        String nextAction;
+        switch (action) {
+            case "lstmodel":
+                nextAction = buildLstModel(request, response);
+                break;
+            default:
+                request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
+                nextAction = "Login.jsp";
         }
 
+        request.getRequestDispatcher(nextAction).forward(request, response);
+    }
+
+    private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
+        String nextAction = "/WEB-INF/views/HomeView.jsp";
+        request.setAttribute("applicationName","Pizzaria Rolingo");
+        request.setAttribute("tittle","Menu Principal");
+        
+        
+        request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
+        List<MenuItem> menu = new ArrayList<>();
+        menu.add(new MenuItem("Clientes","mvccustomer?do=lstmodel"));
+        menu.add(new MenuItem("Pizzas","mvcpizza?do=lstmodel"));
+        menu.add(new MenuItem("Sobremesas","mvcdessert?do=lstmodel"));
+        menu.add(new MenuItem("Bebidas","mvcdrink?do=lstmodel"));
+        
+        request.setAttribute("datasource", menu);
+        
+        
+        return nextAction;
+    }
+    
+    private String readParameter(HttpServletRequest req, String parameterName) {
+        return readParameter(req, parameterName, "");
+    }
+
+    private String readParameter(HttpServletRequest req, String parameterName, String defaultValue) {
+        String value = req.getParameter(parameterName);
+        if ((value == null) || (value.equals(""))) {
+            value = defaultValue;
+        }
+
+        return value;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
