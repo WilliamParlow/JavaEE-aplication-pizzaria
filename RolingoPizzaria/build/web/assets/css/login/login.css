@@ -19,19 +19,6 @@ and open the template in the editor.
     box-sizing: border-box !important;
 }
 
-.login-relative {
-    position: relative;
-    overflow: hidden;
-    padding: 0 !important;
-    height: 100%;
-    margin: 0 !important;
-}
-
-.login-relative > div {
-    height: 100%;
-    padding: 50px 0;
-}
-
 .login-btn {
     border: none;
     color: #FFF;
@@ -66,46 +53,8 @@ and open the template in the editor.
     cursor: pointer;
 }
 
-.navbar-login,
-.login-footer {
-    background-color: #FF5722;
-}
-
-.navbar-brand {
-    color: #FFF;
-    cursor: default;
-    -webkit-user-select: none;  
-    -moz-user-select: none;    
-    -ms-user-select: none;      
-    user-select: none;
-}
-
-.login-footer {
-    height: 50px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-footer > address {
-    margin: 0;
-    color: #FFF;
-}
-
 .form-toggler-container {
     margin-top: 10px;
-}
-
-.invalid-form-input {
-    border: 2px solid red;
-}
-
-.invalid-text-form {
-    color: red
 }
 
 @media all and (max-width: 768px) {

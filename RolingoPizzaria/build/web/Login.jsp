@@ -15,6 +15,7 @@
 
         <%@include file="/WEB-INF/includes/default_header.jsp"%>
        
+        <link rel="stylesheet" href="assets/css/general/app.css">
         <link rel="stylesheet" href="assets/css/login/login.css">
         <link rel="stylesheet" href="assets/css/general/loading.css">
 
@@ -34,7 +35,7 @@
         </div>
 
         <!-- Page navbar -->
-        <nav class="navbar-login navbar-fixed-top">
+        <nav class="navbar-default navbar-fixed-top">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <span class="navbar-brand">Rolingo Pizzaria</span>
@@ -45,7 +46,7 @@
 
 
         <!-- Page content - Signup and Signin forms -->
-        <section class="login-relative container-fluid">
+        <section class="content-relative container-fluid">
 
             <div class="col-xs-12">
 
@@ -145,7 +146,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="login-footer">
+        <footer class="default-footer">
             <address>Developed by Will - <% out.print(new SimpleDateFormat("YYYY").format(new Date()));%></address>
         </footer>
 

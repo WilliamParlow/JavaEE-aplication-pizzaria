@@ -3,6 +3,9 @@
   <persistence-unit name="RolingoPersistensePU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>br.org.catolicasc.rolingo.daos.entities.User</class>
+    <class>br.org.catolicasc.rolingo.daos.entities.Pizza</class>
+    <class>br.org.catolicasc.rolingo.daos.entities.Dessert</class>
+    <class>br.org.catolicasc.rolingo.daos.entities.Drink</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/rolingo?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

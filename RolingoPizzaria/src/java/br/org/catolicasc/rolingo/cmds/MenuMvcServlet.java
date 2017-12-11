@@ -54,19 +54,14 @@ public class MenuMvcServlet extends HttpServlet {
     }
 
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
-        String nextAction = "/WEB-INF/views/HomeView.jsp";
-        request.setAttribute("applicationName","Pizzaria Rolingo");
-        request.setAttribute("tittle","Menu Principal");
         
+        String nextAction = "/WEB-INF/views/Pizzas.jsp";
+        
+        request.setAttribute("applicationName","Pizzaria Rolingo");
+        request.setAttribute("tittle","Lista de pizzas");            
         
         request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
-        List<MenuItem> menu = new ArrayList<>();
-        menu.add(new MenuItem("Clientes","mvccustomer?do=lstmodel"));
-        menu.add(new MenuItem("Pizzas","mvcpizza?do=lstmodel"));
-        menu.add(new MenuItem("Sobremesas","mvcdessert?do=lstmodel"));
-        menu.add(new MenuItem("Bebidas","mvcdrink?do=lstmodel"));
         
-        request.setAttribute("datasource", menu);
         
         
         return nextAction;
