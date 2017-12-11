@@ -6,11 +6,8 @@
 package br.org.catolicasc.rolingo.cmds;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,9 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cliente
  */
-@WebServlet(name = "MenuMvcServlet", urlPatterns = {"/mvcmenu"}, initParams = {
-    @WebInitParam(name = "do", value = "")})
-public class MenuMvcServlet extends HttpServlet {
+public class PizzaMvcServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,56 +29,19 @@ public class MenuMvcServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-      
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        
-        String action = this.readParameter(request, "do");
-        String nextAction;
-        
-        switch (action) {
-            
-            case "lstmodel":
-                nextAction = buildLstModel(request, response);
-                break;
-                
-            default:
-                request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
-                nextAction = "Login.jsp";
-                
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet PizzaMvcServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet PizzaMvcServlet at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-
-        request.getRequestDispatcher(nextAction).forward(request, response);
-        
-    }
-
-    private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
-        
-        String nextAction = "/WEB-INF/views/Pizzas.jsp";
-        
-        request.setAttribute("applicationName","Pizzaria Rolingo");
-        request.setAttribute("tittle","Lista de pizzas");            
-        
-        request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
-        
-        
-        
-        return nextAction;
-    }
-    
-    private String readParameter(HttpServletRequest req, String parameterName) {
-        return readParameter(req, parameterName, "");
-    }
-
-    private String readParameter(HttpServletRequest req, String parameterName, String defaultValue) {
-        String value = req.getParameter(parameterName);
-        if ((value == null) || (value.equals(""))) {
-            value = defaultValue;
-        }
-
-        return value;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

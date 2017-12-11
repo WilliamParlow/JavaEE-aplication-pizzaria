@@ -59,6 +59,7 @@ public class UserControllerServlet extends HttpServlet {
                 userDao.create(user);
 
                 HttpSession session = request.getSession();
+                
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("userName", name);
                 

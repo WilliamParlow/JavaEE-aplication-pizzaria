@@ -16,9 +16,33 @@
         <servlet-name>logoutServlet</servlet-name>
         <servlet-class>br.org.catolicasc.rolingo.controllers.LogOutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PizzaMvcServlet</servlet-name>
+        <servlet-class>br.org.catolicasc.rolingo.cmds.PizzaMvcServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DessertMvcServlet</servlet-name>
+        <servlet-class>br.org.catolicasc.rolingo.cmds.DessertMvcServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DrinkMvcServlet</servlet-name>
+        <servlet-class>br.org.catolicasc.rolingo.cmds.DrinkMvcServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>logoutServlet</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PizzaMvcServlet</servlet-name>
+        <url-pattern>/PizzaMvcServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DessertMvcServlet</servlet-name>
+        <url-pattern>/DessertMvcServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DrinkMvcServlet</servlet-name>
+        <url-pattern>/DrinkMvcServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -27,10 +27,10 @@ public class Pizza implements Serializable {
     @Column(unique = false, nullable = false, length = 45)
     private String name;
     
-    @Column(unique = false, nullable = false, length = 2000)
+    @Column(unique = false, nullable = false)
     private String recipe;
     
-    @Column(unique = false, nullable = false, length = 45)
+    @Column(unique = false, nullable = false)
     private String ingredient;
     
     @Column(unique = false, nullable = true)

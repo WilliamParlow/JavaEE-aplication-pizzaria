@@ -24,13 +24,13 @@ public class Dessert implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(unique = false, nullable = false, length = 45)
+    @Column(unique = false, nullable = false)
     private String name;
     
-    @Column(unique = false, nullable = false, length = 2000)
+    @Column(unique = false, nullable = false)
     private String recipe;
     
-    @Column(unique = false, nullable = false, length = 45)
+    @Column(unique = false, nullable = false)
     private String ingredient;
     
     @Column(unique = false, nullable = true)
