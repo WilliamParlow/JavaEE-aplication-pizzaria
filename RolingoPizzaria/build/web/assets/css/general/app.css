@@ -151,30 +151,25 @@ html, body {
     color: #FFF;
 }
 
-.content-header::after {
+.content-header::after,
+.content-header::before {
     content: '';
-    height: 14px;
-    width: 14px;
+    height: 6px;
+    width: 50%;
     background-color: #ff5722;
-    border-radius: 100%;
     z-index: 100;
     position: absolute;
-    bottom: -10px;
     left: 0;
     animation: slideball 2s infinite alternate ease-in-out;
 }
+.content-header::after {
+    bottom: -6px;
+    left: 0;
+}
 
 .content-header::before {
-    content: '';
-    height: 14px;
-    width: 14px;
-    background-color: #ff5722;
-    border-radius: 100%;
-    z-index: 100;
-    position: absolute;
-    top: -10px;
+    top: -5.5px;
     left: 0;
-    animation: slideball 2s infinite alternate ease-in-out;
 }
 
 .default-footer {
@@ -222,10 +217,10 @@ html, body {
 
 @keyframes slideball {
     0% {
-        left: -5px;
+        left: 0px;
     }
     
     100% {
-        left: calc(100% - 10px);
+        left: calc(100% - 50%);
     }
 }
