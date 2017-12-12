@@ -28,14 +28,70 @@ html, body {
 .content-relative {
     position: relative;
     overflow: hidden;
+    word-wrap: break-word;
     padding: 0 !important;
     height: 100%;
     margin: 0 !important;
 }
 
 .content-relative > div {
-    height: 100%;
-    padding: 50px 0;
+    height: calc(100% - 100px);
+    margin-top: 50px;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list-container {
+    padding: 0 5px;
+}
+
+.food-container {
+    box-shadow: 0 0 4px #000000;
+    border-radius:  0 0 3px 3px;
+    margin-top: 14px;
+}
+
+.food-container:last-child {
+    margin-bottom: 14px;
+}
+
+.food-container > .food-header {
+    color: #FFF;
+    text-shadow: 0 0 4px #000;
+    height: 30vh;
+    display: flex;
+    align-items: flex-end;
+    background-size: cover;
+}
+
+.food-container > .food-header > h1 {
+    margin: 0;
+}
+
+.food-container > .food-body {
+    background-color: #333;
+    color: #F5F5F5;
+}
+
+.food-container > .food-body > .food-item {
+    margin-top: 1ch; 
+}
+
+.food-container > .food-body > .food-item > p {
+    height: 5ch;
+    max-height: 5ch;
+    overflow: hidden;
+    margin: 0;
+}
+
+.food-container > .food-header,
+.food-container > .food-body {
+    padding: 5px;
+}
+
+.food-label {
+    font-weight: bold;
 }
 
 .navbar-header {
@@ -74,10 +130,51 @@ html, body {
     align-items: center;
 }
 
+.nav-active {
+    background-color: rgba(217, 16, 16, 1);
+}
+
 .navbar-default,
 .default-footer {
     background-color: #FF5722;
     height: 50px;
+    box-shadow: 0 0 6px #000;
+}
+
+.content-header {
+    border-bottom: 6px solid #000;
+    border-top: 6px solid #000;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    background-color: rgba(217, 16, 16, 1);
+    color: #FFF;
+}
+
+.content-header::after {
+    content: '';
+    height: 14px;
+    width: 14px;
+    background-color: #ff5722;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    animation: slideball 2s infinite alternate ease-in-out;
+}
+
+.content-header::before {
+    content: '';
+    height: 14px;
+    width: 14px;
+    background-color: #ff5722;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    animation: slideball 2s infinite alternate ease-in-out;
 }
 
 .default-footer {
@@ -102,4 +199,33 @@ html, body {
 
 .invalid-text-form {
     color: red
+}
+
+::-webkit-scrollbar {
+    background-color: #000000;
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+
+
+/* KEYFRAMES */
+
+@keyframes slideball {
+    0% {
+        left: -5px;
+    }
+    
+    100% {
+        left: calc(100% - 10px);
+    }
 }

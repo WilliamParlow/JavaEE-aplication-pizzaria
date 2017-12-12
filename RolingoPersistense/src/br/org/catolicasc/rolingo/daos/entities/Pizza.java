@@ -35,20 +35,16 @@ public class Pizza implements Serializable {
     
     @Column(unique = false, nullable = true)
     private String imageUrl;
-    
-    @Column(unique = false, nullable = false, length = 45)
-    private String size;
 
     public Pizza() {
         super();
     }
 
-    public Pizza(String name, String recipe, String ingredient, String imageUrl, String size) {
+    public Pizza(String name, String recipe, String ingredient, String imageUrl) {
         this.name = name;
         this.recipe = recipe;
         this.ingredient = ingredient;
         this.imageUrl = imageUrl;
-        this.size = size;
     }
     
     public Long getId() {
@@ -86,15 +82,5 @@ public class Pizza implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-    
-    
     
 }

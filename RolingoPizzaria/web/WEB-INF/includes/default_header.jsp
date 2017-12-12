@@ -14,3 +14,4 @@
 <link rel="stylesheet" href="assets/css/fonts/material_design/css/material-design-iconic-font.min.css">
 
 <link rel="stylesheet" href="assets/css/general/app.css">
+<link rel="stylesheet" href="assets/css/general/loading.css">

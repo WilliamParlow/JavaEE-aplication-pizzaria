@@ -59,7 +59,7 @@ public class AuthenticationControllerServlet extends HttpServlet {
                     session.setAttribute("userId", Long.toString(user.getId()));
                     session.setAttribute("userName", user.getName());
 
-                    request.getRequestDispatcher("mvcmenu?do=lstmodel").forward(request, response);
+                    request.getRequestDispatcher("mvcmenu?do=lstpizzas").forward(request, response);
 
                 } else {
                     

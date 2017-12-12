@@ -63,7 +63,7 @@ public class UserControllerServlet extends HttpServlet {
                 session.setAttribute("userId", user.getId());
                 session.setAttribute("userName", name);
                 
-                request.getRequestDispatcher("mvcmenu?do=lstmodel").forward(request, response);
+                request.getRequestDispatcher("mvcmenu?do=lstpizzas").forward(request, response);
 
             } catch (Exception e) {
 

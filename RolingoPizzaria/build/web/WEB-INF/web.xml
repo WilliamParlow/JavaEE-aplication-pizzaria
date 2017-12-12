@@ -34,15 +34,15 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PizzaMvcServlet</servlet-name>
-        <url-pattern>/PizzaMvcServlet</url-pattern>
+        <url-pattern>/mvcpizza</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DessertMvcServlet</servlet-name>
-        <url-pattern>/DessertMvcServlet</url-pattern>
+        <url-pattern>/mvcdessert</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DrinkMvcServlet</servlet-name>
-        <url-pattern>/DrinkMvcServlet</url-pattern>
+        <url-pattern>/mvcdrink</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

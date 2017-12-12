@@ -10,8 +10,8 @@
 <!-- Page navbar -->
 <nav class="navbar-default navbar-fixed-top">
     <div class="navbar-header">
-        <div class="navbar-item"><a href="mvcpizza?do=lstmodel">Pizzas</a></div>
-        <div class="navbar-item"><a href="mvcdessert?do=lstmodel">Sobremesas</a></div>
-        <div class="navbar-item"><a href="mvcdrink?do=lstmodel">Bebidas</a></div>
+        <div class="navbar-item"><a href="mvcmenu?do=lstpizzas" class="${navbarClassName.pizza}">Pizzas</a></div>
+        <div class="navbar-item"><a href="mvcmenu?do=lstdesserts" class="${navbarClassName.dessert}">Sobremesas</a></div>
+        <div class="navbar-item"><a href="mvcmenu?do=lstdrinks" class="${navbarClassName.drink}">Bebidas</a></div>
     </div>
 </nav>

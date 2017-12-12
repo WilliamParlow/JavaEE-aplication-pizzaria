@@ -5,9 +5,9 @@
  */
 package br.org.catolicasc.rolingo.cmds;
 
+import br.org.catolicasc.rolingo.adapters.NavbarClassName;
+import br.org.catolicasc.rolingo.adapters.ReadParameterHelper;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
@@ -40,13 +40,21 @@ public class MenuMvcServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         
-        String action = this.readParameter(request, "do");
+        String action = ReadParameterHelper.readParameter(request, "do");
         String nextAction;
         
         switch (action) {
             
-            case "lstmodel":
-                nextAction = buildLstModel(request, response);
+            case "lstpizzas":
+                nextAction = buildLstPizzaModel(request, response);
+                break;
+                
+            case "lstdesserts":
+                nextAction = buildLstDessertModel(request, response);
+                break;
+                
+            case "lstdrinks":
+                nextAction = buildLstDrinkModel(request, response);
                 break;
                 
             default:
@@ -59,31 +67,49 @@ public class MenuMvcServlet extends HttpServlet {
         
     }
 
-    private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
+    private String buildLstPizzaModel(HttpServletRequest request, HttpServletResponse response) {
         
-        String nextAction = "/WEB-INF/views/Pizzas.jsp";
+        String nextAction = "mvcpizza?do=lstmodel";
         
         request.setAttribute("applicationName","Pizzaria Rolingo");
-        request.setAttribute("tittle","Lista de pizzas");            
+        request.setAttribute("tittle","Lista de pizzas");
+        
+        NavbarClassName navbarClassName = new NavbarClassName("nav-active", "", "");
+        request.setAttribute("navbarClassName", navbarClassName);
         
         request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
-        
-        
         
         return nextAction;
     }
     
-    private String readParameter(HttpServletRequest req, String parameterName) {
-        return readParameter(req, parameterName, "");
+    private String buildLstDessertModel(HttpServletRequest request, HttpServletResponse response) {
+        
+        String nextAction = "mvcdessert?do=lstmodel";
+        
+        request.setAttribute("applicationName","Pizzaria Rolingo");
+        request.setAttribute("tittle","Lista de Sobremesas");            
+        
+        NavbarClassName navbarClassName = new NavbarClassName("", "nav-active", "");
+        request.setAttribute("navbarClassName", navbarClassName);
+        
+        request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
+        
+        return nextAction;
     }
-
-    private String readParameter(HttpServletRequest req, String parameterName, String defaultValue) {
-        String value = req.getParameter(parameterName);
-        if ((value == null) || (value.equals(""))) {
-            value = defaultValue;
-        }
-
-        return value;
+    
+    private String buildLstDrinkModel(HttpServletRequest request, HttpServletResponse response) {
+        
+        String nextAction = "mvcdrink?do=lstmodel";
+        
+        request.setAttribute("applicationName","Pizzaria Rolingo");
+        request.setAttribute("tittle","Lista de bebidas");
+        
+        NavbarClassName navbarClassName = new NavbarClassName("", "", "nav-active");
+        request.setAttribute("navbarClassName", navbarClassName);
+        
+        request.setAttribute("userName", (String) request.getSession().getAttribute("username"));
+        
+        return nextAction;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

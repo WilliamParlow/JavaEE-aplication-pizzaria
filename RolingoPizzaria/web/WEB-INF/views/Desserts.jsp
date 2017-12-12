@@ -4,8 +4,6 @@
     Author     : Cliente
 --%>
 
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -15,15 +13,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <%@include file="/WEB-INF/includes/default_header.jsp"%>
-       
-        <link rel="stylesheet" href="assets/css/login/login.css">
-        <link rel="stylesheet" href="assets/css/general/loading.css">
 
-        <title>${title}</title>
+        <title>${applicationName} - ${tittle}</title>
 
     </head>
     <body>
-        
+
         <%@include file="/WEB-INF/includes/navbar.jsp"%>
 
 
@@ -33,8 +28,13 @@
 
             <div class="col-xs-12">
 
+                <div class="list-container">
+                    
+                    <h1 class="content-header">Lista de Sobremesas</h1>
 
+                    <%@include file="/WEB-INF/includes/default_list.jsp"%>
 
+                </div>
 
             </div>
 
