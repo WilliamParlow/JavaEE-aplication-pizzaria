@@ -191,8 +191,8 @@ html, body {
 }
 
 .content-header {
-    border-bottom: 6px solid #000;
-    border-top: 6px solid #000;
+    border-bottom: 6px solid #ff5722;
+    border-top: 6px solid #ff5722;
     text-align: center;
     padding: 10px;
     position: relative;
@@ -204,21 +204,21 @@ html, body {
 .content-header::before {
     content: '';
     height: 6px;
-    width: 50%;
-    background-color: #ff5722;
+    width: 100%;
     z-index: 100;
     position: absolute;
     left: 0;
-    animation: slideball 2s infinite alternate ease-in-out;
 }
 .content-header::after {
     bottom: -6px;
     left: 0;
+    animation: slideball1 .3s infinite alternate ease-in-out;
 }
 
 .content-header::before {
     top: -5.5px;
     left: 0;
+    animation: slideball2 .3s infinite alternate ease-in-out;
 }
 
 .default-footer {
@@ -264,12 +264,22 @@ html, body {
 
 /* KEYFRAMES */
 
-@keyframes slideball {
+@keyframes slideball1 {
     0% {
-        left: 0px;
+        background: linear-gradient(to left, #ff774c ,#FFF, #ff774c);
     }
     
     100% {
-        left: calc(100% - 50%);
+        background: linear-gradient(to left, #FFF, #ff774c, #FFF);
+    }
+}
+
+@keyframes slideball2 {
+    0% {
+        background: linear-gradient(to left, #FFF, #ff774c, #FFF);
+    }
+    
+    100% {
+        background: linear-gradient(to left, #ff774c ,#FFF, #ff774c);
     }
 }
