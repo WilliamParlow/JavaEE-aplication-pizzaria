@@ -27,11 +27,14 @@ public class Dessert implements Serializable {
     @Column(unique = false, nullable = false)
     private String name;
     
-    @Column(unique = false, nullable = false)
+    @Column(unique = false, nullable = false, length = 9999)
     private String recipe;
     
-    @Column(unique = false, nullable = false)
+    @Column(unique = false, nullable = false, length = 9999)
     private String ingredient;
+    
+    @Column(unique = false, nullable = false, length = 9999)
+    private String description;
     
     @Column(unique = false, nullable = true)
     private String imageUrl;
@@ -40,10 +43,11 @@ public class Dessert implements Serializable {
         super();
     }
 
-    public Dessert(String name, String recipe, String ingredient, String imageUrl) {
+    public Dessert(String name, String recipe, String ingredient, String description, String imageUrl) {
         this.name = name;
         this.recipe = recipe;
         this.ingredient = ingredient;
+        this.description = description;
         this.imageUrl = imageUrl;
     }
     
@@ -82,5 +86,12 @@ public class Dessert implements Serializable {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

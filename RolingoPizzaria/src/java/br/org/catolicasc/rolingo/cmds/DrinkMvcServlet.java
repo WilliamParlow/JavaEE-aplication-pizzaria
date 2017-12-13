@@ -39,7 +39,7 @@ public class DrinkMvcServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
 
         request.setCharacterEncoding("UTF-8");
@@ -66,6 +66,22 @@ public class DrinkMvcServlet extends HttpServlet {
                 nextAction = buildDeleteModel(request, response);
                 break;
 
+            case "newmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "detailsmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "delete":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "update":
+                nextAction = buildDeleteModel(request, response);
+                break;
+                
             default:
                 request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
                 nextAction = "Login.jsp";
@@ -75,19 +91,20 @@ public class DrinkMvcServlet extends HttpServlet {
         request.getRequestDispatcher(nextAction).forward(request, response);
 
     }
-    
+
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
-        
+
         String nextAction = "/WEB-INF/views/Drinks.jsp";
-        
+
         DrinkDAO drinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
         List<Drink> drinks = new ArrayList<Drink>();
-        
+
         drinks = drinkDao.findDrinkEntities();
         request.setAttribute("datasource", drinks);
-        
+        request.setAttribute("mvcontroller", "mvcdrink");
+
         return nextAction;
-        
+
     }
 
     private String buildAddModel(HttpServletRequest request, HttpServletResponse response) {
@@ -101,7 +118,6 @@ public class DrinkMvcServlet extends HttpServlet {
     private String buildDeleteModel(HttpServletRequest request, HttpServletResponse response) {
         return "";
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

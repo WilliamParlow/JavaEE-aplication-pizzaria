@@ -39,7 +39,7 @@ public class DessertMvcServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         response.setContentType("text/html;charset=UTF-8");
 
         request.setCharacterEncoding("UTF-8");
@@ -66,6 +66,22 @@ public class DessertMvcServlet extends HttpServlet {
                 nextAction = buildDeleteModel(request, response);
                 break;
 
+            case "newmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "detailsmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "delete":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "update":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
             default:
                 request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
                 nextAction = "Login.jsp";
@@ -77,15 +93,16 @@ public class DessertMvcServlet extends HttpServlet {
     }
 
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
-        
+
         String nextAction = "/WEB-INF/views/Desserts.jsp";
-        
+
         DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
         List<Dessert> desserts = new ArrayList<Dessert>();
-        
+
         desserts = dessertDao.findDessertEntities();
         request.setAttribute("datasource", desserts);
-        
+        request.setAttribute("mvcontroller", "mvcdessert");
+
         return nextAction;
     }
 

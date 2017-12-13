@@ -114,12 +114,12 @@
 
                         <div class="form-group">
                             <label for="login">Email:&nbsp; </label>
-                            <input class="form-control" name="login" id="login" type="email" placeholder="Digite seu email!" required>
+                            <input class="form-control" name="login" id="createLogin" type="email" placeholder="Digite seu email!" required>
                         </div>
 
                         <div class="form-group">
                             <label for="passwd">Senha:&nbsp;</label>
-                            <input class="form-control" name="passwd" id="passwd" type="password" placeholder="Digite sua senha!" required>
+                            <input class="form-control" name="passwd" id="createPasswd" type="password" placeholder="Digite sua senha!" required>
                         </div>
 
                         <div class="invalid-text-form">${msg}</div>

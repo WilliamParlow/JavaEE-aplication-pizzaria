@@ -50,6 +50,7 @@ html, body {
     box-shadow: 0 0 4px #000000;
     border-radius:  0 0 3px 3px;
     margin-top: 14px;
+    position: relative;
 }
 
 .food-container:last-child {
@@ -70,17 +71,18 @@ html, body {
 }
 
 .food-container > .food-body {
-    background-color: #333;
+    background-color: #ff5722;
     color: #F5F5F5;
 }
 
 .food-container > .food-body > .food-item {
     margin-top: 1ch; 
+    text-align: justify;
 }
 
 .food-container > .food-body > .food-item > p {
-    height: 5ch;
-    max-height: 5ch;
+    height: 10ch;
+    max-height: 10ch;
     overflow: hidden;
     margin: 0;
 }
@@ -92,6 +94,53 @@ html, body {
 
 .food-label {
     font-weight: bold;
+}
+
+.food-btn-container {
+    position: absolute;
+    width: 100%;
+    text-align: right;
+}
+
+.food-btn {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    opacity: .9;
+}
+
+.seeplus-btn-container {
+    text-align: center;
+    background-color: #d91010;
+}
+
+.seeplus-btn {
+    width: 100%;
+    height: 4ch;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.seeplus-btn,
+.seeplus-btn:focus,
+.seeplus-btn:hover {
+    text-decoration: none;
+    transition: .3s ease-in-out;
+}
+
+.seeplus-btn:focus,
+.seeplus-btn:hover {
+    background-color: #FFF;
+    color: #000;
 }
 
 .navbar-header {

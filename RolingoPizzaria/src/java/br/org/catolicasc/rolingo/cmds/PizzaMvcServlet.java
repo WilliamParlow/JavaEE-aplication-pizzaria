@@ -65,6 +65,22 @@ public class PizzaMvcServlet extends HttpServlet {
                 nextAction = buildDeleteModel(request, response);
                 break;
 
+            case "newmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "detailsmodel":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "delete":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
+            case "update":
+                nextAction = buildDeleteModel(request, response);
+                break;
+
             default:
                 request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
                 nextAction = "Login.jsp";
@@ -74,19 +90,20 @@ public class PizzaMvcServlet extends HttpServlet {
         request.getRequestDispatcher(nextAction).forward(request, response);
 
     }
-    
+
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
-        
+
         String nextAction = "/WEB-INF/views/Pizzas.jsp";
-        
+
         PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
         List<Pizza> pizzas = new ArrayList<>();
-        
+
         pizzas = pizzaDao.findPizzaEntities();
         request.setAttribute("datasource", pizzas);
-        
+        request.setAttribute("mvcontroller", "mvcpizza");
+
         return nextAction;
-        
+
     }
 
     private String buildAddModel(HttpServletRequest request, HttpServletResponse response) {
