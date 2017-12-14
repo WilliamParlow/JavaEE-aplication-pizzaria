@@ -5,6 +5,8 @@
  */
 package br.org.catolicasc.rolingo.cmds;
 
+import br.org.catolicasc.rolingo.adapters.FormPageModel;
+import br.org.catolicasc.rolingo.adapters.InputFormModel;
 import br.org.catolicasc.rolingo.adapters.PersistenceFactory;
 import br.org.catolicasc.rolingo.adapters.ReadParameterHelper;
 import br.org.catolicasc.rolingo.daos.DessertDAO;
@@ -93,7 +95,7 @@ public class DessertMvcServlet extends HttpServlet {
         String nextAction = "/WEB-INF/views/Desserts.jsp";
 
         DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
-        List<Dessert> desserts = new ArrayList<Dessert>();
+        List<Dessert> desserts = new ArrayList<>();
 
         desserts = dessertDao.findDessertEntities();
         request.setAttribute("datasource", desserts);
@@ -106,16 +108,43 @@ public class DessertMvcServlet extends HttpServlet {
 
         String nextAction = "/WEB-INF/views/GenericFormView.jsp";
 
-        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        FormPageModel formPageModel = new FormPageModel("Nova Sobremesa", "mvcdessert", "", "hidden", "lstdesserts", "new", 0);
+
+        List<InputFormModel> inputs = new ArrayList<>();
+
+        inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da sobremesa", "Nome: ", "input", true, false, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da sobremesa", "Receita: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da sobremesa", "Ingredientes: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da sobremesa", "Descrição: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+        request.setAttribute("formmodel", formPageModel);
+        request.setAttribute("formobject", inputs);
 
         return nextAction;
+
     }
 
     private String buildUpdateModel(HttpServletRequest request, HttpServletResponse response) {
 
         String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+        String dessertId = (String) request.getParameter("id");
 
         DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        Dessert dessert = dessertDao.findDessert(Long.parseLong(dessertId));
+
+        FormPageModel formPageModel = new FormPageModel("Editar ".concat(dessert.getName()), "mvcdessert", "", "hidden", "lstdesserts", "update", dessert.getId());
+
+        List<InputFormModel> inputs = new ArrayList<>();
+
+        inputs.add(new InputFormModel("name", "name", "text", dessert.getName(), "form-control", "Digite o nome da sobremesa", "Nome: ", "input", true, false, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", dessert.getRecipe(), "form-control input-text-area", "Digite a receita da sobremesa", "Receita: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", dessert.getIngredient(), "form-control input-text-area", "Digite os ingredientes da sobremesa", "Ingredientes: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("description", "description", "text", dessert.getDescription(), "form-control input-text-area", "Digite a descrição da sobremesa", "Descrição: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", dessert.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+        request.setAttribute("formmodel", formPageModel);
+        request.setAttribute("formobject", inputs);
 
         return nextAction;
     }
@@ -123,35 +152,118 @@ public class DessertMvcServlet extends HttpServlet {
     private String buildDetailsModel(HttpServletRequest request, HttpServletResponse response) {
 
         String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+        String dessertId = (String) request.getParameter("id");
 
         DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        Dessert dessert = dessertDao.findDessert(Long.parseLong(dessertId));
+
+        FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(dessert.getName()), "mvcdessert", "hidden", "", "lstdesserts", "", dessert.getId());
+
+        List<InputFormModel> inputs = new ArrayList<>();
+
+        inputs.add(new InputFormModel("name", "name", "text", dessert.getName(), "form-control", "Digite o nome da sobremesa", "Nome: ", "input", false, true, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", dessert.getRecipe(), "form-control input-text-area", "Digite a receita da sobremesa", "Receita: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", dessert.getIngredient(), "form-control input-text-area", "Digite os ingredientes da sobremesa", "Ingredientes: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("description", "description", "text", dessert.getDescription(), "form-control input-text-area", "Digite a descrição da sobremesa", "Descrição: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", dessert.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
+
+        request.setAttribute("formmodel", formPageModel);
+        request.setAttribute("formobject", inputs);
 
         return nextAction;
     }
 
     private String doUpdate(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/Desserts.jsp";
+        String nextAction;
 
-        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        try {
+
+            String dessertId = (String) request.getParameter("id");
+
+            DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+            Dessert dessert = dessertDao.findDessert(Long.parseLong(dessertId));
+
+            dessert.setDescription(request.getParameter("description"));
+            dessert.setImageUrl(request.getParameter("imageurl"));
+            dessert.setIngredient(request.getParameter("ingredient"));
+            dessert.setName(request.getParameter("name"));
+            dessert.setRecipe(request.getParameter("recipe"));
+
+            dessertDao.edit(dessert);
+
+            nextAction = "mvcmenu?do=lstdesserts";
+
+        } catch (Exception e) {
+
+            String dessertId = (String) request.getParameter("id");
+
+            DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+            Dessert dessert = dessertDao.findDessert(Long.parseLong(dessertId));
+
+            FormPageModel formPageModel = new FormPageModel("Editar ".concat(dessert.getName()), "mvcdessert", "", "hidden", "lstdesserts", "update", dessert.getId());
+
+            request.setAttribute("formmodel", formPageModel);
+
+            nextAction = "mvcdessert?do=updatemodel&id=".concat(dessertId);
+            request.setAttribute("error", "Não foi possível atualizar os dados da");
+
+        }
 
         return nextAction;
     }
 
     private String doDel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/Desserts.jsp";
+        String nextAction;
 
-        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        try {
+
+            String dessertId = (String) request.getParameter("id");
+
+            DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+            dessertDao.destroy(Long.parseLong(dessertId));
+
+            nextAction = "mvcmenu?do=lstdesserts";
+
+        } catch (Exception e) {
+
+            String dessertId = (String) request.getParameter("id");
+
+            System.out.println("Erro ao deletar registro! " + dessertId);
+            nextAction = "mvcmenu?do=lstdesserts";
+
+        }
 
         return nextAction;
+
     }
-    
+
     private String doNew(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/Desserts.jsp";
+        String nextAction;
 
-        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+        try {
+
+            DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+            Dessert dessert = new Dessert();
+
+            dessert.setDescription(request.getParameter("description"));
+            dessert.setImageUrl(request.getParameter("imageurl"));
+            dessert.setIngredient(request.getParameter("ingredient"));
+            dessert.setName(request.getParameter("name"));
+            dessert.setRecipe(request.getParameter("recipe"));
+
+            dessertDao.create(dessert);
+            
+            nextAction = "mvcmenu?do=lstdesserts";
+
+        } catch (Exception e) {
+            
+            System.out.println("Erro ao criar registro! ");
+            nextAction = "mvcmenu?do=lstdesserts";
+            
+        }
 
         return nextAction;
     }

@@ -210,8 +210,6 @@ public class PizzaMvcServlet extends HttpServlet {
 
         }
 
-        PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
-
         return nextAction;
     }
 
