@@ -10,7 +10,7 @@ package br.org.catolicasc.rolingo.adapters;
  * @author Cliente
  */
 public class InputFormModel {
-    
+
     private String id;
     private String name;
     private String type;
@@ -18,6 +18,7 @@ public class InputFormModel {
     private String classname;
     private String placeholder;
     private String label;
+    private String inputtype;
     private boolean isRequired;
     private boolean isDisable;
     private boolean isHidden;
@@ -26,7 +27,7 @@ public class InputFormModel {
         super();
     }
 
-    public InputFormModel(String id, String name, String type, String value, String classname, String placeholder, String label, boolean isRequired, boolean isDisable, boolean isHidden) {
+    public InputFormModel(String id, String name, String type, String value, String classname, String placeholder, String label, String inputtype, boolean isRequired, boolean isDisable, boolean isHidden) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -34,6 +35,7 @@ public class InputFormModel {
         this.classname = classname;
         this.placeholder = placeholder;
         this.label = label;
+        this.inputtype = inputtype;
         this.isRequired = isRequired;
         this.isDisable = isDisable;
         this.isHidden = isHidden;
@@ -88,7 +90,7 @@ public class InputFormModel {
     }
 
     public String isRequired() {
-         return (isRequired) ? "required" : "";
+        return (isRequired) ? "required" : "";
     }
 
     public void setIsRequired(boolean isRequired) {
@@ -118,5 +120,13 @@ public class InputFormModel {
     public void setLabel(String label) {
         this.label = label;
     }
-    
+
+    public String getInputtype() {
+        return inputtype;
+    }
+
+    public void setInputtype(String inputtype) {
+        this.inputtype = inputtype;
+    }
+
 }

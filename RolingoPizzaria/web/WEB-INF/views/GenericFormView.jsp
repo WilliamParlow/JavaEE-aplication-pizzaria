@@ -40,7 +40,15 @@
                             <c:forEach var="o" items="${formobject}">
                                 <div class="form-view-item">
                                     <label for="${o.id}">${o.label}</label>
-                                    <input class="${o.classname} ${o.isRequired()}" type="${o.type}" id="${o.id}" name="${o.name}" value="${o.value}" placeholder="${o.placeholder}" ${o.isDisable()} ${o.isRequired()}>
+                                    <c:choose>
+                                        <c:when test="${o.inputtype == "input"}">
+                                            <input class="${o.classname}" type="${o.type}" id="${o.id}" name="${o.name}" value="${o.value}" placeholder="${o.placeholder}" ${o.isDisable()} ${o.isRequired()}>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <textarea class="${o.classname}" id="${o.id}" name="${o.name}" placeholder="${o.placeholder}" ${o.isDisable()} ${o.isRequired()}>${o.value}</textarea>
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </c:forEach>
 

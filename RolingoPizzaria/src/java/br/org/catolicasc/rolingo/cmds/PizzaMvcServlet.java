@@ -112,11 +112,11 @@ public class PizzaMvcServlet extends HttpServlet {
 
         List<InputFormModel> inputs = new ArrayList<>();
 
-        inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da pizza", "Nome: ", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da pizza", "Receita: ", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", true, false, false));
+        inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
 
         request.setAttribute("formmodel", formPageModel);
         request.setAttribute("formobject", inputs);
@@ -137,11 +137,11 @@ public class PizzaMvcServlet extends HttpServlet {
 
         List<InputFormModel> inputs = new ArrayList<>();
 
-        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", true, false, false));
+        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
 
         request.setAttribute("formmodel", formPageModel);
         request.setAttribute("formobject", inputs);
@@ -157,15 +157,15 @@ public class PizzaMvcServlet extends HttpServlet {
         PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
         Pizza pizza = pizzaDao.findPizza(Long.parseLong(pizzaId));
 
-        FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(pizza.getName()), "mvcpizza", "hidden", "hidden", "lstpizzas", "", pizza.getId());
+        FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(pizza.getName()), "mvcpizza", "hidden", "", "lstpizzas", "", pizza.getId());
 
         List<InputFormModel> inputs = new ArrayList<>();
 
-        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", false, true, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", false, true, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", false, true, false));
-        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", false, true, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", false, true, false));
+        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", false, true, false));
+        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", false, true, false));
+        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
 
         request.setAttribute("formmodel", formPageModel);
         request.setAttribute("formobject", inputs);
