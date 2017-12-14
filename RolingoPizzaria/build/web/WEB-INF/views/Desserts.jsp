@@ -18,6 +18,15 @@
 
     </head>
     <body>
+        
+        <!-- Loading ring -->
+        <div id="dualRingLoading" class="lds-css">
+            <div class="lds-dual-ring">
+                <div class="spinner-container">
+                    <div></div>
+                </div>
+            </div>
+        </div>
 
         <%@include file="/WEB-INF/includes/navbar.jsp"%>
 
@@ -40,16 +49,9 @@
 
         </section>
 
-        <!-- Footer -->
-        <footer class="default-footer">
-            <address>Developed by Will - <% out.print(new SimpleDateFormat("YYYY").format(new Date()));%></address>
-        </footer>
+        <%@include file="/WEB-INF/includes/custom_footer.jsp"%>
 
-
-
-        <%@include file="/WEB-INF/includes/default_footer.jsp"%>
-
-
+        <script src="assets/js/events/login/loginEvents.js"></script>
 
     </body>
 

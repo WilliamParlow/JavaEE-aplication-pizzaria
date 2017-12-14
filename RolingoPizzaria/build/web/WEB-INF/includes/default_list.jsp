@@ -12,7 +12,7 @@
         <c:forEach var="o" items="${datasource}">
             <div class="food-container">
                 <div class="food-btn-container">
-                    <a class="food-btn btn btn-danger" href="${mvcontroller}?do=deletemodel&id=${o.id}"><i class="zmdi zmdi-delete"></i></a>
+                    <a class="food-btn btn btn-danger" href="${mvcontroller}?do=delete&id=${o.id}"><i class="zmdi zmdi-delete"></i></a>
                     <a class="food-btn btn btn-warning" href="${mvcontroller}?do=updatemodel&id=${o.id}"><i class="zmdi zmdi-edit"></i></a>
                 </div>
                 <div class="food-header" style="background-image: url(${o.imageUrl})">

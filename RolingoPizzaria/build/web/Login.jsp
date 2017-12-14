@@ -17,7 +17,6 @@
        
         <link rel="stylesheet" href="assets/css/general/app.css">
         <link rel="stylesheet" href="assets/css/login/login.css">
-        <link rel="stylesheet" href="assets/css/general/loading.css">
 
         <title>Entre na Rolingo - O Melhor Sistema de gerenciamento de Pizzaria</title>
 
@@ -144,13 +143,6 @@
             </div>
 
         </section>
-
-        <!-- Footer -->
-        <footer class="default-footer">
-            <address>Developed by Will - <% out.print(new SimpleDateFormat("YYYY").format(new Date()));%></address>
-        </footer>
-
-
 
         <%@include file="/WEB-INF/includes/default_footer.jsp"%>
 

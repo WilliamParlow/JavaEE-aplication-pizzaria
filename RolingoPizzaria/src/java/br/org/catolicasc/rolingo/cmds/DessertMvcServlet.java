@@ -62,24 +62,20 @@ public class DessertMvcServlet extends HttpServlet {
                 nextAction = buildUpdateModel(request, response);
                 break;
 
-            case "deletemodel":
-                nextAction = buildDeleteModel(request, response);
-                break;
-
-            case "newmodel":
-                nextAction = buildDeleteModel(request, response);
-                break;
-
             case "detailsmodel":
-                nextAction = buildDeleteModel(request, response);
+                nextAction = buildDetailsModel(request, response);
                 break;
 
             case "delete":
-                nextAction = buildDeleteModel(request, response);
+                nextAction = doDel(request, response);
                 break;
 
             case "update":
-                nextAction = buildDeleteModel(request, response);
+                nextAction = doUpdate(request, response);
+                break;
+
+            case "new":
+                nextAction = doNew(request, response);
                 break;
 
             default:
@@ -107,15 +103,57 @@ public class DessertMvcServlet extends HttpServlet {
     }
 
     private String buildAddModel(HttpServletRequest request, HttpServletResponse response) {
-        return "";
+
+        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
     }
 
     private String buildUpdateModel(HttpServletRequest request, HttpServletResponse response) {
-        return "";
+
+        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
     }
 
-    private String buildDeleteModel(HttpServletRequest request, HttpServletResponse response) {
-        return "";
+    private String buildDetailsModel(HttpServletRequest request, HttpServletResponse response) {
+
+        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
+    }
+
+    private String doUpdate(HttpServletRequest request, HttpServletResponse response) {
+
+        String nextAction = "/WEB-INF/views/Desserts.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
+    }
+
+    private String doDel(HttpServletRequest request, HttpServletResponse response) {
+
+        String nextAction = "/WEB-INF/views/Desserts.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
+    }
+    
+    private String doNew(HttpServletRequest request, HttpServletResponse response) {
+
+        String nextAction = "/WEB-INF/views/Desserts.jsp";
+
+        DessertDAO dessertDao = new DessertDAO(PersistenceFactory.getFactoryInstance());
+
+        return nextAction;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

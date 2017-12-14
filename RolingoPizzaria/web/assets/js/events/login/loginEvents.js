@@ -26,4 +26,14 @@ $(document).ready(function () {
 
     });
 
+    $('form').submit(function () {
+
+        $('.lds-dual-ring').fadeIn(LOADING_DELAY, function () {
+
+            $('#dualRingLoading').fadeIn();
+
+        });
+
+    })
+
 });

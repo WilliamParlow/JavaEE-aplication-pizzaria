@@ -43,7 +43,7 @@ html, body {
 }
 
 .list-container {
-    padding: 0 5px;
+    padding: 0 10px;
 }
 
 .food-container {
@@ -80,11 +80,19 @@ html, body {
     text-align: justify;
 }
 
+
 .food-container > .food-body > .food-item > p {
     height: 10ch;
-    max-height: 10ch;
+    max-height: 7ch;
     overflow: hidden;
     margin: 0;
+    display: block;
+    /* To create a box with 3 lines and add ellipsis on third line overflowed */
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .food-container > .food-header,
@@ -194,7 +202,8 @@ html, body {
     border-bottom: 6px solid #ff5722;
     border-top: 6px solid #ff5722;
     text-align: center;
-    padding: 10px;
+    padding: 10px 0;
+    margin: 30px 0;
     position: relative;
     background-color: rgba(217, 16, 16, 1);
     color: #FFF;
@@ -216,7 +225,7 @@ html, body {
 }
 
 .content-header::before {
-    top: -5.5px;
+    top: -6.5px;
     left: 0;
     animation: slideball2 .3s infinite alternate ease-in-out;
 }
@@ -268,7 +277,7 @@ html, body {
     0% {
         background: linear-gradient(to left, #ff774c ,#FFF, #ff774c);
     }
-    
+
     100% {
         background: linear-gradient(to left, #FFF, #ff774c, #FFF);
     }
@@ -278,7 +287,7 @@ html, body {
     0% {
         background: linear-gradient(to left, #FFF, #ff774c, #FFF);
     }
-    
+
     100% {
         background: linear-gradient(to left, #ff774c ,#FFF, #ff774c);
     }

@@ -36,7 +36,7 @@ public class Pizza implements Serializable {
     @Column(unique = false, nullable = false, length = 9999)
     private String description;
     
-    @Column(unique = false, nullable = true)
+    @Column(unique = false, nullable = true, length = 9999)
     private String imageUrl;
 
     public Pizza() {
