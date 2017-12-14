@@ -75,11 +75,11 @@ public class DrinkMvcServlet extends HttpServlet {
             case "update":
                 nextAction = doUpdate(request, response);
                 break;
-                
+
             case "new":
                 nextAction = doNew(request, response);
                 break;
-                
+
             default:
                 request.setAttribute("msg", String.format("Erro do controller, action %s não encontrada", action));
                 nextAction = "Login.jsp";
@@ -91,15 +91,27 @@ public class DrinkMvcServlet extends HttpServlet {
     }
 
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
+        
+        String nextAction;
 
-        String nextAction = "/WEB-INF/views/Drinks.jsp";
+        try {
 
-        DrinkDAO drinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
-        List<Drink> drinks = new ArrayList<>();
+            nextAction = "/WEB-INF/views/Drinks.jsp";
 
-        drinks = drinkDao.findDrinkEntities();
-        request.setAttribute("datasource", drinks);
-        request.setAttribute("mvcontroller", "mvcdrink");
+            DrinkDAO drinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
+            List<Drink> drinks = new ArrayList<>();
+
+            drinks = drinkDao.findDrinkEntities();
+            request.setAttribute("datasource", drinks);
+            request.setAttribute("mvcontroller", "mvcdrink");
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstdrinks";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
 
@@ -107,20 +119,35 @@ public class DrinkMvcServlet extends HttpServlet {
 
     private String buildAddModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+        String nextAction;
 
-        FormPageModel formPageModel = new FormPageModel("Novo Drink", "mvcdrink", "", "hidden", "lstdrinks", "new", 0);
+        try {
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
 
-        inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da bebida", "Nome: ", "input", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da babida", "Ingredientes: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Adicionar nova bebida");
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            FormPageModel formPageModel = new FormPageModel("Novo Drink", "mvcdrink", "", "hidden", "lstdrinks", "new", 0);
+
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da bebida", "Nome: ", "input", true, false, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da babida", "Ingredientes: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstdrinks";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
 
@@ -128,48 +155,78 @@ public class DrinkMvcServlet extends HttpServlet {
 
     private String buildUpdateModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
-        String drinkId = (String) request.getParameter("id");
+        String nextAction;
 
-        DrinkDAO DrinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
-        Drink drink = DrinkDao.findDrink(Long.parseLong(drinkId));
+        try {
 
-        FormPageModel formPageModel = new FormPageModel("Editar ".concat(drink.getName()), "mvcdrink", "", "hidden", "lstdrinks", "update", drink.getId());
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
+            String drinkId = (String) request.getParameter("id");
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            DrinkDAO DrinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
+            Drink drink = DrinkDao.findDrink(Long.parseLong(drinkId));
 
-        inputs.add(new InputFormModel("name", "name", "text", drink.getName(), "form-control", "Digite o nome da bebida", "Nome: ", "input", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", drink.getRecipe(), "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", drink.getIngredient(), "form-control input-text-area", "Digite os ingredientes da bebida", "Ingredientes: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", drink.getDescription(), "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", drink.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Atualizar bebida ".concat(drink.getName()));
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            FormPageModel formPageModel = new FormPageModel("Editar ".concat(drink.getName()), "mvcdrink", "", "hidden", "lstdrinks", "update", drink.getId());
+
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", drink.getName(), "form-control", "Digite o nome da bebida", "Nome: ", "input", true, false, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", drink.getRecipe(), "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", drink.getIngredient(), "form-control input-text-area", "Digite os ingredientes da bebida", "Ingredientes: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("description", "description", "text", drink.getDescription(), "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", drink.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstdrinks";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
     }
 
     private String buildDetailsModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
-        String drinkId = (String) request.getParameter("id");
+        String nextAction;
 
-        DrinkDAO DrinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
-        Drink drink = DrinkDao.findDrink(Long.parseLong(drinkId));
+        try {
 
-        FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(drink.getName()), "mvcdrink", "hidden", "", "lstdrinks", "", drink.getId());
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
+            String drinkId = (String) request.getParameter("id");
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            DrinkDAO DrinkDao = new DrinkDAO(PersistenceFactory.getFactoryInstance());
+            Drink drink = DrinkDao.findDrink(Long.parseLong(drinkId));
 
-        inputs.add(new InputFormModel("name", "name", "text", drink.getName(), "form-control", "Digite o nome da bebida", "Nome: ", "input", false, true, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", drink.getRecipe(), "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", drink.getIngredient(), "form-control input-text-area", "Digite os ingredientes da bebida", "Ingredientes: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("description", "description", "text", drink.getDescription(), "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", drink.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Detalhes da bebida ".concat(drink.getName()));
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(drink.getName()), "mvcdrink", "hidden", "", "lstdrinks", "", drink.getId());
+
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", drink.getName(), "form-control", "Digite o nome da bebida", "Nome: ", "input", false, true, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", drink.getRecipe(), "form-control input-text-area", "Digite a receita da bebida", "Receita: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", drink.getIngredient(), "form-control input-text-area", "Digite os ingredientes da bebida", "Ingredientes: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("description", "description", "text", drink.getDescription(), "form-control input-text-area", "Digite a descrição da bebida", "Descrição: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", drink.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstdrinks";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
     }
@@ -207,7 +264,9 @@ public class DrinkMvcServlet extends HttpServlet {
             request.setAttribute("formmodel", formPageModel);
 
             nextAction = "mvcdrink?do=updatemodel&id=".concat(drinkId);
-            request.setAttribute("error", "Não foi possível atualizar os dados da");
+
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
 
         }
 
@@ -231,7 +290,8 @@ public class DrinkMvcServlet extends HttpServlet {
 
             String drinkId = (String) request.getParameter("id");
 
-            System.out.println("Erro ao deletar registro! " + drinkId);
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
             nextAction = "mvcmenu?do=lstdrinks";
 
         }
@@ -256,18 +316,20 @@ public class DrinkMvcServlet extends HttpServlet {
             drink.setRecipe(request.getParameter("recipe"));
 
             DrinkDao.create(drink);
-            
+
             nextAction = "mvcmenu?do=lstdrinks";
 
         } catch (Exception e) {
-            
-            System.out.println("Erro ao criar registro! ");
+
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
             nextAction = "mvcmenu?do=lstdrinks";
-            
+
         }
 
         return nextAction;
     }
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

@@ -91,14 +91,26 @@ public class PizzaMvcServlet extends HttpServlet {
 
     private String buildLstModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/Pizzas.jsp";
+        String nextAction;
+        
+        try {
 
-        PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
-        List<Pizza> pizzas = new ArrayList<>();
+            nextAction = "/WEB-INF/views/Pizzas.jsp";
 
-        pizzas = pizzaDao.findPizzaEntities();
-        request.setAttribute("datasource", pizzas);
-        request.setAttribute("mvcontroller", "mvcpizza");
+            PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
+            List<Pizza> pizzas = new ArrayList<>();
+
+            pizzas = pizzaDao.findPizzaEntities();
+            request.setAttribute("datasource", pizzas);
+            request.setAttribute("mvcontroller", "mvcpizza");
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstpizzas";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
 
@@ -106,20 +118,35 @@ public class PizzaMvcServlet extends HttpServlet {
 
     private String buildAddModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
+        String nextAction;
 
-        FormPageModel formPageModel = new FormPageModel("Nova Pizza", "mvcpizza", "", "hidden", "lstpizzas", "new", 0);
+        try {
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
 
-        inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Adicionar nova pizza");
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            FormPageModel formPageModel = new FormPageModel("Nova Pizza", "mvcpizza", "", "hidden", "lstpizzas", "new", 0);
+
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", "", "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", "", "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", "", "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("description", "description", "text", "", "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", "", "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstpizzas";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
 
@@ -127,48 +154,77 @@ public class PizzaMvcServlet extends HttpServlet {
 
     private String buildUpdateModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
-        String pizzaId = (String) request.getParameter("id");
+        String nextAction;
+        try {
 
-        PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
-        Pizza pizza = pizzaDao.findPizza(Long.parseLong(pizzaId));
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
+            String pizzaId = (String) request.getParameter("id");
 
-        FormPageModel formPageModel = new FormPageModel("Editar ".concat(pizza.getName()), "mvcpizza", "", "hidden", "lstpizzas", "update", pizza.getId());
+            PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
+            Pizza pizza = pizzaDao.findPizza(Long.parseLong(pizzaId));
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Atualizar pizza ".concat(pizza.getName()));
 
-        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+            FormPageModel formPageModel = new FormPageModel("Editar ".concat(pizza.getName()), "mvcpizza", "", "hidden", "lstpizzas", "update", pizza.getId());
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", true, false, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", true, false, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", true, false, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstpizzas";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
     }
 
     private String buildDetailsModel(HttpServletRequest request, HttpServletResponse response) {
 
-        String nextAction = "/WEB-INF/views/GenericFormView.jsp";
-        String pizzaId = (String) request.getParameter("id");
+        String nextAction;
 
-        PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
-        Pizza pizza = pizzaDao.findPizza(Long.parseLong(pizzaId));
+        try {
 
-        FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(pizza.getName()), "mvcpizza", "hidden", "", "lstpizzas", "", pizza.getId());
+            nextAction = "/WEB-INF/views/GenericFormView.jsp";
+            String pizzaId = (String) request.getParameter("id");
 
-        List<InputFormModel> inputs = new ArrayList<>();
+            PizzaDAO pizzaDao = new PizzaDAO(PersistenceFactory.getFactoryInstance());
+            Pizza pizza = pizzaDao.findPizza(Long.parseLong(pizzaId));
 
-        inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", false, true, false));
-        inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", false, true, false));
-        inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
+            request.setAttribute("applicationName", "Pizzaria Rolingo");
+            request.setAttribute("tittle", "Detalhes da pizza ".concat(pizza.getName()));
 
-        request.setAttribute("formmodel", formPageModel);
-        request.setAttribute("formobject", inputs);
+            FormPageModel formPageModel = new FormPageModel("Visualizar ".concat(pizza.getName()), "mvcpizza", "hidden", "", "lstpizzas", "", pizza.getId());
+
+            List<InputFormModel> inputs = new ArrayList<>();
+
+            inputs.add(new InputFormModel("name", "name", "text", pizza.getName(), "form-control", "Digite o nome da pizza", "Nome: ", "input", false, true, false));
+            inputs.add(new InputFormModel("recipe", "recipe", "text", pizza.getRecipe(), "form-control input-text-area", "Digite a receita da pizza", "Receita: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("ingredient", "ingredient", "text", pizza.getIngredient(), "form-control input-text-area", "Digite os ingredientes da pizza", "Ingredientes: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("description", "description", "text", pizza.getDescription(), "form-control input-text-area", "Digite a descrição da pizza", "Descrição: ", "textarea", false, true, false));
+            inputs.add(new InputFormModel("imageurl", "imageurl", "text", pizza.getImageUrl(), "form-control", "Digite a URL da imagem", "URL da imagem: ", "input", false, true, false));
+
+            request.setAttribute("formmodel", formPageModel);
+            request.setAttribute("formobject", inputs);
+
+        } catch (Exception e) {
+
+            nextAction = "mvcmenu?do=lstpizzas";
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
+
+        }
 
         return nextAction;
     }
@@ -206,7 +262,8 @@ public class PizzaMvcServlet extends HttpServlet {
             request.setAttribute("formmodel", formPageModel);
 
             nextAction = "mvcpizza?do=updatemodel&id=".concat(pizzaId);
-            request.setAttribute("error", "Não foi possível atualizar os dados da");
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
 
         }
 
@@ -230,7 +287,8 @@ public class PizzaMvcServlet extends HttpServlet {
 
             String pizzaId = (String) request.getParameter("id");
 
-            System.out.println("Erro ao deletar registro! " + pizzaId);
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
             nextAction = "mvcmenu?do=lstpizzas";
 
         }
@@ -255,14 +313,15 @@ public class PizzaMvcServlet extends HttpServlet {
             pizza.setRecipe(request.getParameter("recipe"));
 
             pizzaDao.create(pizza);
-            
+
             nextAction = "mvcmenu?do=lstpizzas";
 
         } catch (Exception e) {
-            
-            System.out.println("Erro ao criar registro! ");
+
+            System.err.println(e.getMessage());
+            System.err.println(e.getCause());
             nextAction = "mvcmenu?do=lstpizzas";
-            
+
         }
 
         return nextAction;
